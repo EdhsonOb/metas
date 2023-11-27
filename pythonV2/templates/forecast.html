@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forecast</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Forecast Data</h1>
+    <div id="forecast-chart"></div>
+
+    <script>
+        // Obtener los datos de pronóstico desde Flask
+        var forecastData = {{ forecast_data | tojson }};
+
+        // Separar las fechas y los valores pronosticados
+        var dates = forecastData.map(function(item) {
+            return item.period;
+        });
+
+        var values = forecastData.map(function(item) {
+            return item.value;
+        });
+
+        // Crear el gráfico de barras con Plotly
+        var trace = {
+            x: dates,
+            y: values,
+            type: 'bar',
+            marker: {
+                color: 'rgb(0, 128, 255)'
+            }
+        };
+
+        var layout = {
+            title: 'Forecast Data',
+            xaxis: {
+                title: 'Period'
+            },
+            yaxis: {
+                title: 'Value'
+            }
+        };
+
+        var data = [trace];
+
+        Plotly.newPlot('forecast-chart', data, layout);
+    </script>
+</body>
+</html>

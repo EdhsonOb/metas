@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pronóstico de Regresión Lineal por Producto</title>
+</head>
+<body>
+    <h1>Selecciona los productos para ver el pronóstico de regresión lineal</h1>
+    <form method="POST" action="/">
+        <select name="selected_products" multiple>
+            {% for product_id, product_name in product_list %}
+                <option value="{{ product_id }}">{{ product_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Ver Pronóstico">
+    </form>
+
+    {% for product_id, plot_url in plot_urls.items() %}
+        <h2>Pronóstico para Producto {{ product_id }}</h2>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico para Producto {{ product_id }}">
+    {% endfor %}
+</body>
+</html>
