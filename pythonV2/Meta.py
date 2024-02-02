@@ -20,12 +20,6 @@ def execute_rpc(url, db, username, password, model, method, domain=[], fields=[]
 def home():
     global valor_anio, valor_mes
 
-    # Configuración de la conexión XML-RPC
-    url = 'https://biancorelab.odoo.com'
-    db = 'biancorelab'
-    username = 'erodriguez@biancorelab.com'
-    password = '2iUaFfRinJTf6w4'
-
     # Filtro adicional
     domain = [
         "&",
